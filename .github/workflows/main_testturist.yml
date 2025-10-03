@@ -25,6 +25,10 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
+        env:
+          PROD_DATABASE_URL: ${{SECRETS.PROD_DATABSE_URL}}
+          PROD_USERNAME: ${{SECRETS.PROD_USERNAME}}
+          PROD_PASSWORD: ${{SECRETS.PROD_PASSWORD}}
         run: mvn clean install
 
       - name: Upload artifact for deployment job
@@ -60,4 +64,5 @@ jobs:
           app-name: 'testturist'
           slot-name: 'Production'
           package: '*.jar'
+
           
